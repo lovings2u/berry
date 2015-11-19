@@ -1,0 +1,273 @@
+<!-- Main Container -->
+<div class="container">
+    <div class="box">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <hr>
+            <h3 class="intro-text text-center">About
+                <strong>Like DDALGi</strong>
+            </h3>
+            <hr>
+        </div>
+        
+        <div class="col-md-6">
+            <img src="../img/strawberry/image1.jpg" width="100%;" class="thumbnail">
+        
+        </div>
+        
+        <div class="col-md-6">
+            <p>여기에는 사진을 마구마구마구 집어넣습니다.</p>
+            <p>사진을 또넣고또넣고 또넣고 마구마구 넣습니다.</p>
+            <p>사진이 없다구요? 그럼 찍으세요 젠장.</p>
+        </div>
+        <div class="col-lg-12 col-md-12 col-xs-12 text-center" style="margin-top: 30px;">
+            <a href="#buy" class="btn btn-default btn-xl page-scroll">Purchase Now!</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+<!--/Main container -->
+
+<!--Image container -->
+
+    <div class="box">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <hr>
+            <h3 class="intro-text text-center">Our
+                <strong>Maker</strong>
+            </h3>
+            <hr>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+            <h3>너는 누구니
+                <small>누가 만들었나</small>
+            </h3>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+            <h3>아니면 그냥
+                <small>맛있게 먹는 방법같은거</small>
+            </h3>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+            <h3>그렇게 막
+                <small>사진 넣는거지뭐</small>
+            </h3>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<!-- /Image Container -->
+
+<!-- Order Sheet -->
+    <div class="box" id="buy">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <hr>
+            <h3 class="intro-text text-center">Buy
+                <strong>DDALGi Chunk</strong>
+            </h3>
+            <hr>
+        </div>
+        <div class="col-lg-4 col-md-4"></div>
+        <div class="col-lg-4 col-md-4 col-xs-12 form_input" align="center">
+             <form action="/purchase/confirm" method="POST">
+                <p>핸드폰번호
+                <input type="text" name="cell_phone" class="cell_phone form-control">
+                <p>주소
+                <div class="input-group">
+                    <input readonly type="text" name="address" class="address form-control postcodify_address">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" id="search_button">주소찾기</button>
+                    </span>
+                </div>
+                <br><input tyle="text" name="detail_address" class="detail_address form-control" placeholder="상세주소">
+                </p>
+                    
+                <p>입금자 성명
+                <input type="text" name="buyer_name" class="buyer_name form-control"></p>
+                <p>구매 상품
+                <select id="product" name="product" class=" product form-control">
+                    <option value="">메뉴를 선택해주세요</option>
+                    <option value="딸기청 350g">딸기청 350g</option>
+                    <option value="딸기청 250g">딸기청 250g</option>
+                </select>
+                <p>구매 개수
+                <input id="volume" type="number" name="volume" class="volume form-control"></p>
+
+                <p>총 구매금액
+                <input readonly type="text" name="total" class="total form-control"></p>
+                
+                <p>추천인
+                <input type="text" name="recomm" class="recomm form-control"></p>
+                
+                <button type="submit" class="btn btn-info" onclick="layer_open('layer2');return false;">구매하기</button>
+
+                <div class="layer">
+                    <div class="bg"></div>
+                    <div id="layer2" class="pop-layer">
+                        <div class="pop-container">
+                            <div class="pop-conts">
+                                <!--content //-->
+                                <p class="ctxt mb20">구매내역을 확인하세요.<br>
+                                <div class="confirm_content"></div>    
+                                </p>
+
+                                <div class="btn-r">
+                                    <a href="#" class="cbtn"><button type="button" class="btn btn-warning">닫기</button></a>
+                                    <button type="submit" class="btn btn-info">구매하기</button>
+                                </div>
+                                <!--// content-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        
+        <div class="clearfix"></div>
+    </div>
+<!-- /Order Sheet -->
+
+</div>
+
+<!-- Find Address & Pop-up -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//cdn.poesis.kr/post/search.min.js"></script>
+<script language="javascript">
+<!-- Address Popup -->
+    $("#postcodify").postcodify();
+    $("#search_button").postcodifyPopUp();
+<!-- /Address Popup -->
+<!-- Auto Calculate -->
+    $(function(){
+        $('#volume').change(function(){
+            var product = $('#product').val();
+            if(product == '딸기청 350g'){
+                var price = 19000;
+            } else if(product == '딸기청 250g'){
+                var price = 10000;
+            }
+
+            var volume = $('#volume').val();
+            console.log(product);
+            console.log(volume);
+            var cal = price * volume;
+            console.log(cal);
+            $('.total').val(cal);
+        });        
+    });
+<!-- /Auto Calculate -->
+
+<!-- Search Popup -->
+    $(function(){
+        $('.searching').click(function(){
+        var popUrl = "/purchase/search";   //팝업창에 출력될 페이지 URL
+        var popOption = "width=400, height=200, menuvar=no, resizable=no, scrollbars=no, status=no, toolbar=no, location=no;" ;    
+        //팝업창 옵션(optoin)
+            window.open(popUrl,"",popOption);
+        });
+    })
+<!--/Search Popup -->
+
+<!--Get Data from Popup -->
+    function setChildValue(buy_id, address, detail_address, name){
+        console.log(buy_id);
+        console.log(address);
+        console.log(detail_address);
+        console.log(name);
+        $('.cell_phone').val(buy_id);
+        $('.address').val(address);
+        $('.detail_address').val(detail_address);
+        $('.buyer_name').val(name);
+    };
+
+<!--/Get Data from Popup -->
+
+<!-- Popup Script -->
+    function layer_open(el){
+        var cell_phone = $('.cell_phone').val();
+        var address = $('.address').val();
+        var detail = $('.detail_address').val();
+        var buyer = $('.buyer_name').val();
+        var product = $('.product').val();
+        var volume = $('.volume').val();
+        var total = $('.total').val();
+        var recomm = $('.recomm').val();
+        var password = $('.password').val();
+        $('.confirm_content').html("<table style='width: 100%;'><tr><td>주문자 ID</td><td>" + cell_phone + "</td></tr><tr><td>배송지</td><td>" + address + detail + "</td><tr><td>주문자 성명</td><td>" + buyer + "</td></tr><tr><td>주문상품</td><td>" + product + " - " + volume + "개</td></tr><tr><td>총 결제금액</td><td>" + total + "</td></tr><tr><td>추천인</td><td>" + recomm + "</td></td></table>");
+
+
+        var temp = $('#' + el);
+        var bg = temp.prev().hasClass('bg');    //dimmed 레이어를 감지하기 위한 boolean 변수
+
+        if(bg){
+            $('.layer').fadeIn();   //'bg' 클래스가 존재하면 레이어가 나타나고 배경은 dimmed 된다. 
+        }else{
+            temp.fadeIn();
+        }
+
+        // 화면의 중앙에 레이어를 띄운다.
+        if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight()/2+'px');
+        else temp.css('top', '0px');
+        if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
+        else temp.css('left', '0px');
+
+        temp.find('a.cbtn').click(function(e){
+            if(bg){
+                $('.layer').fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
+            }else{
+                temp.fadeOut();
+            }
+            e.preventDefault();
+        });
+
+        $('.layer .bg').click(function(e){  //배경을 클릭하면 레이어를 사라지게 하는 이벤트 핸들러
+            $('.layer').fadeOut();
+            e.preventDefault();
+        });
+
+    }               
+<!-- /Popup Script -->
+</script>
+<!-- /Find Address & Pop-up-->
+
+
+<!-- Page CSS -->
+<style>
+body{
+    background: url('../img/strawberry/likeddalgi.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+.box {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+{
+    .box:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.layer {display:none; position:fixed; _position:absolute; top:0; left:0; width:100%; height:100%; z-index:100;}
+    .layer .bg {position:absolute; top:0; left:0; width:100%; height:100%; background:#000; opacity:.5; filter:alpha(opacity=50);}
+    .layer .pop-layer {display:block;}
+
+.pop-layer {display:none; position: absolute; top: 50%; left: 50%; width: 410px; height:auto;  background-color:#fff; border: 5px solid #3571B5; z-index: 10;}  
+.pop-layer .pop-container {padding: 20px 25px;}
+.pop-layer p.ctxt {color: #666; line-height: 25px;}
+.pop-layer .btn-r {width: 100%; margin:10px 0 20px; padding-top: 10px; border-top: 1px solid #DDD; text-align:right;}
+td {
+    border-right: 1px solid;
+    text-align: center;
+}
+</style>
