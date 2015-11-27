@@ -2,11 +2,14 @@ class PurchaseController < ApplicationController
   def strawberry
 
   end
+
   def confirm
     find_data = Customer.where(:phone_number => params[:cell_phone]).take
     if find_data.nil?
-      find_data =Customer.create!(phone_number: params[:cell_phone], name: params[:buyer_name])
+      find_data = Customer.create!(phone_number: params[:cell_phone], name: params[:buyer_name])
+      
     end
+    session[:user_id] = find_data.phone_number
     od = Order.create!(progress: 'IN PROGRESS', prod_index: params[:product], prod_volume: params[:volume], prod_price: params[:total],
                   address: params[:address], detail_address: params[:detail_address], order_date: DateTime.now, 
                   customer_id: find_data.id, order_index: DateTime.now.to_s(:number), phone_number: params[:cell_phone],
@@ -37,7 +40,9 @@ class PurchaseController < ApplicationController
   end
 
   def complete
-    @confirm = Order.last
+    buy=Customer.where(:phone_number => session[:user_id]).take
+    @confirm = buy.orders.last
+    @username = buy.name
   end
 
   def search

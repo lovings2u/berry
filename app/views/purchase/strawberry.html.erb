@@ -2,103 +2,64 @@
 <div class="container">
     <div class="box">
         <div class="col-lg-12 col-md-12 col-xs-12">
-            <hr>
-            <h3 class="intro-text text-center">About
-                <strong>Like DDALGi</strong>
+            <h3 class="intro-text text-center">
+                선물용<strong> LIKE DDALGI</strong> 주문하기
             </h3>
             <hr>
         </div>
         
         <div class="col-md-6">
-            <img src="../img/strawberry/image1.jpg" width="100%;" class="thumbnail">
+            <img src="../img/strawberry/image1.png" width="100%;" class="thumbnail">
         
-        </div>
-        
-        <div class="col-md-6">
-            <p>여기에는 사진을 마구마구마구 집어넣습니다.</p>
-            <p>사진을 또넣고또넣고 또넣고 마구마구 넣습니다.</p>
-            <p>사진이 없다구요? 그럼 찍으세요 젠장.</p>
-        </div>
-        <div class="col-lg-12 col-md-12 col-xs-12 text-center" style="margin-top: 30px;">
-            <a href="#buy" class="btn btn-default btn-xl page-scroll">Purchase Now!</a>
-        </div>
+        </div> 
         <div class="clearfix"></div>
     </div>
 
 
 <!--/Main container -->
 
-<!--Image container -->
-
-    <div class="box">
-        <div class="col-lg-12 col-md-12 col-xs-12">
-            <hr>
-            <h3 class="intro-text text-center">Our
-                <strong>Maker</strong>
-            </h3>
-            <hr>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-            <h3>너는 누구니
-                <small>누가 만들었나</small>
-            </h3>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-            <h3>아니면 그냥
-                <small>맛있게 먹는 방법같은거</small>
-            </h3>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
-            <h3>그렇게 막
-                <small>사진 넣는거지뭐</small>
-            </h3>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-<!-- /Image Container -->
-
 <!-- Order Sheet -->
     <div class="box" id="buy">
         <div class="col-lg-12 col-md-12 col-xs-12">
-            <hr>
-            <h3 class="intro-text text-center">Buy
-                <strong>DDALGi Chunk</strong>
+            <h3 class="intro-text text-center">
+                <strong>주문서</strong> 작성하기
             </h3>
             <hr>
         </div>
         <div class="col-lg-4 col-md-4"></div>
         <div class="col-lg-4 col-md-4 col-xs-12 form_input" align="center">
              <form action="/purchase/confirm" method="POST">
-                <p>핸드폰번호
-                <input type="text" name="cell_phone" class="cell_phone form-control">
-                <p>주소
+                <p><strong>주문하시는분 성명을 적어주세요~</strong><br>입금자명과 동일하게 적어주세요!
+                <input type="text" name="buyer_name" class="buyer_name form-control"></p>
+                <p><strong>딸기청을 선물받을 주소를 적어주세요~</strong>
                 <div class="input-group">
                     <input readonly type="text" name="address" class="address form-control postcodify_address">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" id="search_button">주소찾기</button>
                     </span>
                 </div>
-                <br><input tyle="text" name="detail_address" class="detail_address form-control" placeholder="상세주소">
                 </p>
-                    
-                <p>입금자 성명
-                <input type="text" name="buyer_name" class="buyer_name form-control"></p>
+                <br><input tyle="text" name="detail_address" class="detail_address form-control" placeholder="상세주소를 적어주세요~">
+                </p>
+                <p><strong>핸드폰번호를 알려주세요~</strong>
+                <input type="text" name="cell_phone" class="cell_phone form-control" placeholder="-는 빼고 적어주세요~"></p>    
+                
+                <!--
                 <p>구매 상품
                 <select id="product" name="product" class=" product form-control">
                     <option value="">메뉴를 선택해주세요</option>
                     <option value="딸기청 350g">딸기청 350g</option>
                     <option value="딸기청 250g">딸기청 250g</option>
-                </select>
-                <p>구매 개수
-                <input id="volume" type="number" name="volume" class="volume form-control"></p>
+                </select>-->
+                <input type="hidden" placeholder="딸기청 500ml" name="product" class="product">
 
-                <p>총 구매금액
+                <p><strong>몇 개를 주문하시겠어요?</strong>
+                <input id="volume" type="number" name="volume" class="volume form-control" min="1"></p>
+
+                <p><strong>총 구매금액은 이렇게 됩니다~</strong>
                 <input readonly type="text" name="total" class="total form-control"></p>
                 
-                <p>추천인
+                <p><strong>추천인이 있다면 꼭! 적어주세요~</strong><br>(핸드폰 번호를 적으시면 되요~)
                 <input type="text" name="recomm" class="recomm form-control"></p>
                 
                 <button type="submit" class="btn btn-info" onclick="layer_open('layer2');return false;">구매하기</button>
@@ -143,17 +104,11 @@
 <!-- Auto Calculate -->
     $(function(){
         $('#volume').change(function(){
-            var product = $('#product').val();
-            if(product == '딸기청 350g'){
-                var price = 19000;
-            } else if(product == '딸기청 250g'){
-                var price = 10000;
-            }
-
+            var product = 19000;
             var volume = $('#volume').val();
             console.log(product);
             console.log(volume);
-            var cal = price * volume;
+            var cal = product * volume;
             console.log(cal);
             $('.total').val(cal);
         });        
@@ -196,7 +151,7 @@
         var total = $('.total').val();
         var recomm = $('.recomm').val();
         var password = $('.password').val();
-        $('.confirm_content').html("<table style='width: 100%;'><tr><td>주문자 ID</td><td>" + cell_phone + "</td></tr><tr><td>배송지</td><td>" + address + detail + "</td><tr><td>주문자 성명</td><td>" + buyer + "</td></tr><tr><td>주문상품</td><td>" + product + " - " + volume + "개</td></tr><tr><td>총 결제금액</td><td>" + total + "</td></tr><tr><td>추천인</td><td>" + recomm + "</td></td></table>");
+        $('.confirm_content').html("<table style='width: 100%;'><tr><td>주문자 ID</td><td>" + cell_phone + "</td></tr><tr><td>배송지</td><td>" + address + detail + "</td><tr><td>주문자 성명</td><td>" + buyer + "</td></tr><tr><td>주문개수</td><td>" + volume + "개</td></tr><tr><td>총 결제금액</td><td>" + total + "</td></tr><tr><td>추천인</td><td>" + recomm + "</td></td></table>");
 
 
         var temp = $('#' + el);
