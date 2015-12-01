@@ -138,15 +138,33 @@
 
 <!-- Popup Script -->
     function layer_open(el){
-        var cell_phone = $('.cell_phone').val();
-        var address = $('.address').val();
-        var detail = $('.detail_address').val();
-        var buyer = $('.buyer_name').val();
-        var product = $('.product').val();
-        var volume = $('.volume').val();
-        var total = $('.total').val();
-        var recomm = $('.recomm').val();
-        var password = $('.password').val();
+        if($('.buyer_name').val()==""){
+            $('.buyer_name').focus();
+            return;
+        }
+        if($('.address').val()==""){
+            $('.address').focus();
+            return;
+        }
+        if($('.detail_address').val()==""){
+            $('.detail_address').focus();
+            return;
+        }
+        if($('.cell_phone').val()==""){
+            $('.cell_phone').focus();
+            return;
+        }
+        if($('.volume').val()==""){
+            $('.volume').focus();
+            return;
+        }
+        else{
+            var cell_phone = $('.cell_phone').val();
+            var address = $('.address').val();
+            var detail = $('.detail_address').val();
+            var buyer = $('.buyer_name').val();  
+            var volume = $('.volume').val();
+            var total = $('.total').val();
 
         $('.confirm_content').html("<table style='width: 100%;'><tr><td style='white-space: nowrap;'>주문자 ID</td><td>" + cell_phone + "</td></tr><tr><td style='white-space: nowrap;'>배송지</td><td style='word-break: keep-all'>" + address +" "+ detail + "</td><tr><td style='white-space: nowrap;'>주문자 성명</td><td>" + buyer + "</td></tr><tr><td style='white-space: nowrap;'>주문개수</td><td>" + volume + "개</td></tr><tr><td style='white-space: nowrap;'>총 결제금액</td><td>" + numberWithCommas(total) + "</td></td></table>");
 
@@ -179,7 +197,7 @@
             $('.layer').fadeOut();
             e.preventDefault();
         });
-
+        }
     }               
 <!-- /Popup Script -->
 </script>
