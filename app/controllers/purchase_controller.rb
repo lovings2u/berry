@@ -1,6 +1,6 @@
 class PurchaseController < ApplicationController
   def strawberry
-
+    reset_session
   end
 
   def confirm
@@ -40,11 +40,17 @@ class PurchaseController < ApplicationController
   end
 
   def complete
-    buy=Customer.where(:phone_number => session[:user_id]).take
-    @confirm = buy.orders.last
-    @username = buy.name
+    if session[:user_id].nil?
+      redirect_to '/purchase/nosession'
+    else
+      buy=Customer.where(:phone_number => session[:user_id]).take
+      @confirm = buy.orders.last
+      @username = buy.name
+    end
   end
 
+  def nosession
+  end
   def search
   end
 

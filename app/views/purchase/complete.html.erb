@@ -1,20 +1,18 @@
 <!-- Order Sheet -->
 <div class="container">
     <div class="box" id="buy">
-        <div class="col-lg-12 col-md-12 col-xs-12">
-            <h3 class="intro-text text-center" style="word-break: keep-all;">
+        <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+            <h3 class="intro-text" style="word-break: keep-all;">
                 <h3><strong><%=@username%></strong>님의 상품주문이 <br>완료되었습니다
             </h3>
             <hr>
         </div>
 
-        <div class="col-lg-12 col-md-12 col-xs-12" align="center">
-            <h3><strong><%=@username%></strong>님의 상품주문이 완료되었습니다.</h3><br>
-            <h4>입금하실 계좌는 <strong>신한은행 110-209-493870 이정석</strong>입니다.</h4>
-            <h4>배송 예정일은 <strong><%=@confirm.delivery_date %></strong>입니다. </h4>
+        <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+            <h4 style="white-space: nowrap">입금은 아래 계좌로<br>▼<br> <strong>신한은행 110-209-493870 이정석</strong></h4>
             <div class="space"></div>
             
-            <table class="ci" width="80%">
+            <table class="ci" width="100%">
                 <tr>
                     <td class="left">주문번호</td>
                     <td class="right"><%= @confirm.order_index %></td>
@@ -33,24 +31,15 @@
                 </tr>
                 <tr>
                     <td class="left">주문상품</td>
-                    <td class="right"><strong>Like DDALGi 딸기청 500ml</storng>   /   <%= @confirm.prod_volume %>개</td>
-                </tr>
-            </table>
-
-            <div class="space">
-
-            </div>
-
-            <table width="80%">
-                <tr>
-                    <td class="up">주문금액</td>
-                    <td class="up">총결제금액</td>
+                    <td class="right"><strong>like ddalgi 딸기청 500ml</storng> / <%= @confirm.prod_volume %>개</td>
                 </tr>
                 <tr>
-                    <td class="down"><%=@confirm.prod_price%><span class="won">원</span></td>
-                    <td class="down"><%=@confirm.prod_price%><span class="won">원</span></td>
+                    <td class="left">총 결제금액</td>
+                    <td class="right"><span id="sum"></span>원</td>
                 </tr>
             </table>
+            <br>
+            <h4>배송 예정일은 <strong><%=@confirm.delivery_date %></strong>입니다. </h4>
 
         </div>
 
@@ -66,8 +55,15 @@
 <!-- /Order Sheet -->
 
 </div>
-
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    $(document).ready(function(){
+        $('#sum').html(numberWithCommas(<%=@confirm.prod_price%>));
+    });
+</script>
 
 <!-- Page CSS -->
 <style>
@@ -106,7 +102,7 @@ table {
     white-space: nowrap;
 }
 .right{
-    padding-left: 45px;
+    word-break: keep-all;
 }
 .space{
     padding: 15px;

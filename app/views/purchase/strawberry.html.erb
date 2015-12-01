@@ -2,8 +2,8 @@
 <div class="container">
     <div class="box" id="buy">
             <div class="col-lg-12 col-md-12 col-xs-12">
-            <h3 class="intro-text text-center">
-                선물용<strong> LIKE DDALGI</strong> 주문하기
+            <h3 class="intro-text text-center" style="white-space: nowrap">
+                선물용<strong> likeddalgi</strong> 주문하기
             </h3>
             <hr>
         </div>
@@ -45,14 +45,15 @@
                 <input type="hidden" placeholder="딸기청 500ml" name="product" class="product">
 
                 <p><strong>몇 개를 주문하시겠어요?</strong>
-                <input id="volume" type="number" name="volume" class="volume form-control" min="1"></p>
+                <input id="volume" type="number" name="volume" class="volume form-control" min="1" step="1"></p>
 
                 <p><strong>총 구매금액은 이렇게 됩니다~</strong>
-                <input readonly type="text" name="total" class="total form-control"></p>
-                
+                <input readonly type="text" class="sum form-control"></p>
+                <input readonly type="hidden" name="total" class="total">
+                <!--
                 <p><strong>추천인이 있다면 꼭! 적어주세요~</strong><br>(핸드폰 번호를 적으시면 되요~)
                 <input type="text" name="recomm" class="recomm form-control"></p>
-                
+                -->
                 <button type="submit" class="btn btn-info" onclick="layer_open('layer2');return false;">구매하기</button>
 
                 <div class="layer">
@@ -93,6 +94,9 @@
     $("#search_button").postcodifyPopUp();
 <!-- /Address Popup -->
 <!-- Auto Calculate -->
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     $(function(){
         $('#volume').change(function(){
             var product = 19000;
@@ -101,6 +105,7 @@
             console.log(volume);
             var cal = product * volume;
             console.log(cal);
+            $('.sum').val(numberWithCommas(cal));
             $('.total').val(cal);
         });        
     });
@@ -142,7 +147,8 @@
         var total = $('.total').val();
         var recomm = $('.recomm').val();
         var password = $('.password').val();
-        $('.confirm_content').html("<table style='width: 100%;'><tr><td>주문자 ID</td><td>" + cell_phone + "</td></tr><tr><td>배송지</td><td>" + address + detail + "</td><tr><td>주문자 성명</td><td>" + buyer + "</td></tr><tr><td>주문개수</td><td>" + volume + "개</td></tr><tr><td>총 결제금액</td><td>" + total + "</td></tr><tr><td>추천인</td><td>" + recomm + "</td></td></table>");
+
+        $('.confirm_content').html("<table style='width: 100%;'><tr><td style='white-space: nowrap;'>주문자 ID</td><td>" + cell_phone + "</td></tr><tr><td style='white-space: nowrap;'>배송지</td><td style='word-break: keep-all'>" + address +" "+ detail + "</td><tr><td style='white-space: nowrap;'>주문자 성명</td><td>" + buyer + "</td></tr><tr><td style='white-space: nowrap;'>주문개수</td><td>" + volume + "개</td></tr><tr><td style='white-space: nowrap;'>총 결제금액</td><td>" + numberWithCommas(total) + "</td></td></table>");
 
 
         var temp = $('#' + el);
@@ -215,5 +221,8 @@ body{
 td {
     border-right: 1px solid;
     text-align: center;
+}
+#ad!{
+    word-break: keep-all;
 }
 </style>
