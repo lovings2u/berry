@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'purchase/confirm'
   post 'purchase/confirm'
   get 'purchase/save_data'
+  get 'purchase/nosession'
 
   get 'index/home'
   get 'index/main'

@@ -111,31 +111,6 @@
     });
 <!-- /Auto Calculate -->
 
-<!-- Search Popup -->
-    $(function(){
-        $('.searching').click(function(){
-        var popUrl = "/purchase/search";   //팝업창에 출력될 페이지 URL
-        var popOption = "width=400, height=200, menuvar=no, resizable=no, scrollbars=no, status=no, toolbar=no, location=no;" ;    
-        //팝업창 옵션(optoin)
-            window.open(popUrl,"",popOption);
-        });
-    })
-<!--/Search Popup -->
-
-<!--Get Data from Popup -->
-    function setChildValue(buy_id, address, detail_address, name){
-        console.log(buy_id);
-        console.log(address);
-        console.log(detail_address);
-        console.log(name);
-        $('.cell_phone').val(buy_id);
-        $('.address').val(address);
-        $('.detail_address').val(detail_address);
-        $('.buyer_name').val(name);
-    };
-
-<!--/Get Data from Popup -->
-
 <!-- Popup Script -->
     function layer_open(el){
         if($('.buyer_name').val()==""){
