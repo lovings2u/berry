@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'unirest'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

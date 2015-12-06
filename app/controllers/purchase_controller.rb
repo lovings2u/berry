@@ -1,4 +1,5 @@
 class PurchaseController < ApplicationController
+  require 'unirest'
   def strawberry
     reset_session
   end
@@ -51,9 +52,27 @@ class PurchaseController < ApplicationController
 
   def nosession
   end
-  def search
+  def check
+    @sendlist = Unirest.post("http://api.openapi.io/ppurio/1//sendnumber/list/skyhan1106",
+    headers:{:"x-waple-authorization" => "MzI4Ni0xNDQ1NjY2Nzg5OTE4LWRiZGZhOTYwLWVjNWUtNDJhZS05ZmE5LTYwZWM1ZTUyYWU5NQ=="},
+    parameters:{})
   end
-
-  def find
+  def message
+    @savedata = Unirest.post("http://api.openapi.io/ppurio/1//sendnumber/save/skyhan1106",
+    headers:{:"x-waple-authorization" => "MzI4Ni0xNDQ1NjY2Nzg5OTE4LWRiZGZhOTYwLWVjNWUtNDJhZS05ZmE5LTYwZWM1ZTUyYWU5NQ=="},
+    parameters:{
+    :sendnumber => "01052489085",
+    :comment => "전민호"})
+    @response = Unirest.post("http://api.openapi.io/ppurio/1/message/sms/skyhan1106",
+    headers:{:"x-waple-authorization" => "MzI4Ni0xNDQ1NjY2Nzg5OTE4LWRiZGZhOTYwLWVjNWUtNDJhZS05ZmE5LTYwZWM1ZTUyYWU5NQ=="},
+    parameters:{ 
+    :dest_phone => "01052489085" , 
+    :dest_name => "홍길동" , 
+    :send_phone => "01052489085" , 
+    :send_name => "홍길순" , 
+    :subject => "제목" , 
+    :msg_body => "문자메시지테스트중" , 
+    :apiVersion => "1" , 
+    :id => "skyhan1106" })
   end
 end
