@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   post 'purchase/message'
   get 'purchase/save_data'
   get 'purchase/nosession'
+  get 'manage/message'
+  post 'manage/message'
+  get 'manage/charged'
+  get 'manage/delivery'
+  get 'manage/complete'
+  get 'manage/test'
+  post 'manage/test'
 
   get 'index/home'
   get 'index/main'

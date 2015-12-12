@@ -15,14 +15,18 @@ class PurchaseController < ApplicationController
                   address: params[:address], detail_address: params[:detail_address], order_date: DateTime.now, 
                   customer_id: find_data.id, order_index: DateTime.now.to_s(:number), phone_number: params[:cell_phone],
                   customer_name: params[:buyer_name])
-    
-    if od.order_date.between?(Date.today.beginning_of_week, Date.today.end_of_week - 3)
-      od.delivery_date = Date.today.next_week(:monday)
-      od.save
-    else
-      od.delivery_date = Date.today.next_week(:thursday)
-      od.save
-    end
+    message = "라이크딸기청을 주문해주셔서 감사합니다!! 주문번호는" + od.order_index.to_s + "입니다~ 신한 110-209-493870 이정석으로" + od.prod_price.to_s + "원! 입금 부탁드릴게요^.^"
+    Unirest.post("http://api.openapi.io/ppurio/1/message/sms/skyhan1106",
+    headers:{:"x-waple-authorization" => "MzI4Ni0xNDQ1NjY2Nzg5OTE4LWRiZGZhOTYwLWVjNWUtNDJhZS05ZmE5LTYwZWM1ZTUyYWU5NQ=="},
+    parameters:{ 
+    :dest_phone => od.phone_number , 
+    :send_phone => "01027655429" , 
+    :send_name => "like ddalgi" , 
+    :subject => "주문완료" , 
+    :msg_body =>  message, 
+    :apiVersion => "1" , 
+    :id => "skyhan1106" })
+
     redirect_to '/purchase/save_data'
   end
 
